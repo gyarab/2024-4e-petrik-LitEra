@@ -4,20 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Historická Časová Osa</title>
+  <link rel="stylesheet" href="\assets\styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+ 
 </head>
 <body>
   <div id="app">
-    {{ message }}
+    <!-- Levá lišta -->
+    <div class="sidebar">
+      <ul>
+        <li>Knihy z četby</li>
+        <li>Klíčoví autoři</li>
+        <li>Hlavní díla</li>
+        <li>Dění okolo</li>
+      </ul>
+    </div>
+
+    <!-- Hlavní část s časovou osou -->
+    <div class="main-content">
+      <div class="timeline" ref="timeline">
+        <!-- Časová osa bude vykreslena dynamicky -->
+        <p>{{ message }}</p>
+      </div>
+
+      <!-- Slider pro navigaci -->
+      <input
+        type="range"
+        class="slider"
+        min="1"
+        max="100"
+        v-model="zoomLevel"
+        @input="adjustZoom"
+      />
+    </div>
+
+    <!-- Tlačítko nastavení vpravo -->
+    <div class="settings-button">
+      <button @click="openSettings">⚙️</button>
+    </div>
+
+    <!-- Modální okno nastavení -->
+    <div v-if="showSettings" class="settings-modal">
+      <h3>Nastavení</h3>
+      <!-- Obsah modálního okna -->
+      <button @click="closeSettings">Zavřít</button>
+    </div>
   </div>
 
-  <script>
-    new Vue({
-      el: '#app',
-      data: {
-        message: 'Vítejte na historické časové ose!  Vue OMG CRAZY'
-      }
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
